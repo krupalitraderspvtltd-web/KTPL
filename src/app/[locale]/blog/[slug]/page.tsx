@@ -1,5 +1,6 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import {
   ArrowLeft,
   ArrowRight,
@@ -15,12 +16,22 @@ export const dynamic = "force-dynamic";
 
 type PageProps = {
   params: Promise<{
+    locale: string;
     slug: string;
   }>;
 };
 
-function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("en-IN", {
+function formatDate(date: Date, locale: string) {
+  const dateLocale =
+    locale === "gu"
+      ? "gu-IN"
+      : locale === "hi"
+        ? "hi-IN"
+        : locale === "ar"
+          ? "ar-SA"
+          : "en-IN";
+
+  return new Intl.DateTimeFormat(dateLocale, {
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -91,7 +102,12 @@ function BlogContent({
 export async function generateMetadata({
   params,
 }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+
+  const t = await getTranslations({
+    locale,
+    namespace: "BlogArticlePage",
+  });
 
   const post =
     await prisma.blogPost.findFirst({
@@ -111,7 +127,7 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: "Article Not Found | Krupali Traders",
+      title: t("articleNotFound"),
     };
   }
 
@@ -122,7 +138,7 @@ export async function generateMetadata({
     description:
       post.seoDescription ||
       post.excerpt ||
-      `Read ${post.title} on the Krupali Traders Blog.`,
+      t("metadataDescription", { title: post.title }),
     openGraph: {
       title:
         post.seoTitle ||
@@ -148,7 +164,12 @@ export async function generateMetadata({
 export default async function BlogArticlePage({
   params,
 }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+
+  const t = await getTranslations({
+    locale,
+    namespace: "BlogArticlePage",
+  });
 
   /*
    * Only published articles are
@@ -287,7 +308,7 @@ export default async function BlogArticlePage({
             className="mb-8 inline-flex items-center gap-2 text-sm font-black text-[#1455a0] transition hover:gap-3"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Blog
+            {t("backToBlog")}
           </Link>
 
           {/* Category */}
@@ -320,20 +341,18 @@ export default async function BlogArticlePage({
             <span className="inline-flex items-center gap-2">
               <CalendarDays className="h-4 w-4" />
 
-              {formatDate(
-                articleDate
-              )}
+              {formatDate(articleDate, locale)}
             </span>
 
             <span className="inline-flex items-center gap-2">
               <Clock3 className="h-4 w-4" />
 
-              {readingTime} min read
+              {t("minRead", { minutes: readingTime })}
             </span>
 
             {post.authorName && (
               <span>
-                By{" "}
+                {t("by")}{" "}
                 <span className="font-bold text-[var(--foreground)]">
                   {post.authorName}
                 </span>
@@ -379,13 +398,13 @@ export default async function BlogArticlePage({
               content={post.content}
             />
 
-            {/* Tags */}
+            {/* {t("tags")} */}
 
             {post.tags && (
               <div className="mt-10 border-t border-[var(--border)] pt-7">
                 <div className="mb-3 flex items-center gap-2 text-xs font-black uppercase tracking-[0.14em] text-[#1455a0]">
                   <Tag className="h-4 w-4" />
-                  Tags
+                  {t("tags")}
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -412,12 +431,12 @@ export default async function BlogArticlePage({
               </div>
             )}
 
-            {/* Related Product */}
+            {/* {t("relatedProduct")} */}
 
             {post.product && (
               <div className="mt-10 rounded-2xl border border-blue-500/15 bg-blue-500/5 p-5">
                 <p className="text-xs font-black uppercase tracking-[0.14em] text-[#1455a0]">
-                  Related Product
+                  {t("relatedProduct")}
                 </p>
 
                 <h3 className="mt-2 text-xl font-black">
@@ -434,7 +453,7 @@ export default async function BlogArticlePage({
                   href={`/products/${post.product.type.toLowerCase()}/${post.product.slug}`}
                   className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#1455a0] px-5 py-3 text-sm font-black text-white transition hover:bg-[#104782]"
                 >
-                  View Product
+                  {t("viewProduct")}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -454,23 +473,18 @@ export default async function BlogArticlePage({
               </div>
 
               <h2 className="text-lg font-black">
-                Krupali Traders Blog
+                {t("blogTitle")}
               </h2>
 
               <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
-                Practical insights about
-                international trade,
-                sourcing, import and
-                export, logistics,
-                packaging and global
-                markets.
+                {t("blogDescription")}
               </p>
 
               <Link
                 href="/blog"
                 className="mt-5 inline-flex items-center gap-2 text-sm font-black text-[#1455a0]"
               >
-                Explore All Articles
+                {t("exploreAllArticles")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -483,21 +497,18 @@ export default async function BlogArticlePage({
               </p>
 
               <h2 className="mt-2 text-xl font-black">
-                Explore Our Products
+                {t("exploreProducts")}
               </h2>
 
               <p className="mt-3 text-sm leading-6 text-white/70">
-                Discover our import and
-                export products and
-                explore category-wise
-                offerings.
+                {t("exploreProductsDescription")}
               </p>
 
               <Link
                 href="/products"
                 className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-black text-[#1455a0] transition hover:bg-white/90"
               >
-                View Products
+                {t("viewProducts")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -515,11 +526,11 @@ export default async function BlogArticlePage({
           <div className="mx-auto max-w-6xl">
             <div className="mb-7">
               <p className="text-xs font-black uppercase tracking-[0.16em] text-[#1455a0]">
-                Continue Reading
+                {t("continueReading")}
               </p>
 
               <h2 className="mt-1 text-3xl font-black">
-                Related Articles
+                {t("relatedArticles")}
               </h2>
             </div>
 
@@ -571,7 +582,7 @@ export default async function BlogArticlePage({
 
                       <div className="mt-auto pt-5">
                         <span className="inline-flex items-center gap-2 text-sm font-black text-[#1455a0]">
-                          Read Article
+                          {t("readArticle")}
                           <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                         </span>
                       </div>

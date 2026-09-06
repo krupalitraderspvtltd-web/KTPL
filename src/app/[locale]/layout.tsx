@@ -1,7 +1,10 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import ClientLayoutWrapper from "@/components/layout/ClientLayoutWrapper";
+import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
+
 import "../globals.css";
 
 type LocaleLayoutProps = {
@@ -17,22 +20,17 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html
-      lang={locale}
-      suppressHydrationWarning
+    <NextIntlClientProvider
+      messages={messages}
+      locale={locale}
     >
-      <body suppressHydrationWarning>
-        <NextIntlClientProvider
-          messages={messages}
-          locale={locale}
-        >
-          <ThemeProvider>
-            <ClientLayoutWrapper>
-              {children}
-            </ClientLayoutWrapper>
-          </ThemeProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+      <ThemeProvider>
+        <OrganizationJsonLd locale={locale} />
+
+        <ClientLayoutWrapper>
+          {children}
+        </ClientLayoutWrapper>
+      </ThemeProvider>
+    </NextIntlClientProvider>
   );
 }

@@ -367,3 +367,16 @@ button {
     background-attachment: scroll;
   }
 }
+
+/* Better line-height for Indic and Arabic scripts */
+html[lang="gu"] h1,
+html[lang="gu"] h2,
+html[lang="gu"] h3,
+html[lang="hi"] h1,
+html[lang="hi"] h2,
+html[lang="hi"] h3,
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3 {
+  line-height: 0.95;
+}

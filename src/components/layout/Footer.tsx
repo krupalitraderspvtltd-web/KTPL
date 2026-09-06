@@ -1,5 +1,5 @@
+"use client";
 
-import Link from "next/link";
 import {
   ArrowUpRight,
   Mail,
@@ -15,17 +15,13 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 
+import { useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/routing";
+
 /* ============================================================
-    SOCIAL MEDIA CONFIGURATION
-
-    WhatsApp number is configured below.
-
-    Indian format:
-    919876543210
-
-    Do NOT use:
-    +91 98765 43210
-    ============================================================ */
+   SOCIAL MEDIA CONFIGURATION
+============================================================ */
 
 const WHATSAPP_NUMBER = "919601090109";
 
@@ -37,7 +33,7 @@ const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
 )}`;
 
 /* ============================================================
-    SOCIAL LINKS
+   SOCIAL LINKS
 ============================================================ */
 
 const socialLinks = [
@@ -89,15 +85,15 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const t = useTranslations("Footer");
+
   return (
     <>
       {/* =====================================================
           FLOATING SOCIAL MEDIA BAR
-          Desktop / tablet
       ===================================================== */}
 
       <div className="fixed right-3 top-1/2 z-[80] hidden -translate-y-1/2 flex-col gap-2 sm:flex">
-
         {socialLinks.map((social) => {
           const Icon = social.icon;
 
@@ -107,12 +103,8 @@ export default function Footer() {
               href={social.href}
               aria-label={social.name}
               title={social.name}
-              target={social.href === "#" ? undefined : "_blank"}
-              rel={
-                social.href === "#"
-                  ? undefined
-                  : "noopener noreferrer"
-              }
+              target="_blank"
+              rel="noopener noreferrer"
               className={`
                 group
                 flex
@@ -148,7 +140,6 @@ export default function Footer() {
             </a>
           );
         })}
-
       </div>
 
       {/* =====================================================
@@ -158,7 +149,6 @@ export default function Footer() {
       <footer className="relative overflow-hidden bg-gradient-to-br from-[#050d18] via-[#071b34] to-[#0b3266] text-white">
 
         {/* Decorative glows */}
-
         <div className="gradient-glow -left-32 bottom-0 h-80 w-80 bg-[#1455a0]/20" />
 
         <div className="gradient-glow right-0 top-0 h-96 w-96 bg-[#2d7dd2]/15" />
@@ -180,7 +170,6 @@ export default function Footer() {
                 </div>
 
                 <div>
-
                   <div className="text-xl font-bold tracking-tight">
                     KRUPALI
                   </div>
@@ -188,37 +177,30 @@ export default function Footer() {
                   <div className="-mt-0.5 text-[10px] font-semibold tracking-[0.10em] text-[#d8b45b]">
                     TRADERS PRIVATE LIMITED
                   </div>
-
                 </div>
 
               </div>
 
               <p className="mt-6 max-w-xl text-sm leading-7 text-white/60">
-                Krupali Traders Private Limited connects trusted products,
-                reliable suppliers and international markets through
-                professional import and export solutions.
+                {t("description")}
               </p>
 
-              {/* =================================================
-                  CTA
-              ================================================= */}
+              {/* CTA */}
 
               <Link
                 href="/contact"
                 className="gradient-button mt-7 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white"
               >
-                Start a Conversation
+                {t("startConversation")}
                 <ArrowUpRight size={16} />
               </Link>
 
-              {/* =================================================
-                  FOLLOW US
-              ================================================= */}
+              {/* FOLLOW US */}
 
               <div className="mt-8">
 
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/45">
-                  Follow Us
+                  {t("followUs")}
                 </p>
 
                 <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -232,16 +214,8 @@ export default function Footer() {
                         href={social.href}
                         aria-label={social.name}
                         title={social.name}
-                        target={
-                          social.href === "#"
-                            ? undefined
-                            : "_blank"
-                        }
-                        rel={
-                          social.href === "#"
-                            ? undefined
-                            : "noopener noreferrer"
-                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className={`
                           group
                           flex
@@ -289,7 +263,7 @@ export default function Footer() {
             <div>
 
               <h3 className="font-semibold text-white">
-                Quick Links
+                {t("quickLinks")}
               </h3>
 
               <div className="mt-5 flex flex-col gap-3 text-sm text-white/55">
@@ -298,42 +272,42 @@ export default function Footer() {
                   href="/"
                   className="transition hover:text-[#8fc4ff]"
                 >
-                  Home
+                  {t("home")}
                 </Link>
 
                 <Link
                   href="/about"
                   className="transition hover:text-[#8fc4ff]"
                 >
-                  About Us
+                  {t("about")}
                 </Link>
 
                 <Link
                   href="/products/export"
                   className="transition hover:text-[#8fc4ff]"
                 >
-                  Export Products
+                  {t("exportProducts")}
                 </Link>
 
                 <Link
                   href="/products/import"
                   className="transition hover:text-[#8fc4ff]"
                 >
-                  Import Products
+                  {t("importProducts")}
                 </Link>
 
                 <Link
                   href="/services"
                   className="transition hover:text-[#8fc4ff]"
                 >
-                  Services
+                  {t("services")}
                 </Link>
 
                 <Link
                   href="/contact"
                   className="transition hover:text-[#8fc4ff]"
                 >
-                  Contact
+                  {t("contactLink")}
                 </Link>
 
               </div>
@@ -347,7 +321,7 @@ export default function Footer() {
             <div>
 
               <h3 className="font-semibold text-white">
-                Contact
+                {t("contact")}
               </h3>
 
               <div className="mt-5 space-y-4 text-sm text-white/55">
@@ -361,7 +335,10 @@ export default function Footer() {
 
                   <span>
                     207, 2nd Floor, White House Complex,
-                    Sector 11, Gandhinagar, Gujarat -382010.
+                    <br />
+                    Sector 11, Gandhinagar,
+                    <br />
+                    Gujarat -382010.
                     <br />
                     India
                   </span>
@@ -389,7 +366,7 @@ export default function Footer() {
                   />
 
                   <span>
-                    krupalitraderss@gmail.com
+                    krupalitraderspvtltd@gmail.com
                   </span>
 
                 </div>
@@ -407,12 +384,11 @@ export default function Footer() {
           <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-7 text-sm text-white/40 sm:flex-row sm:items-center sm:justify-between">
 
             <p>
-              © {new Date().getFullYear()} Krupali Traders Private Limited.
-              All rights reserved.
+              {t("copyright")}
             </p>
 
             <p className="text-xs text-white/30">
-              Import • Export • Global Trade
+              {t("tagline")}
             </p>
 
           </div>

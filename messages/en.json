@@ -1,4 +1,11 @@
 {
+  "Common": {
+    "language": "Language",
+    "english": "English",
+    "gujarati": "Gujarati",
+    "hindi": "Hindi",
+    "arabic": "Arabic"
+  },
   "Navbar": {
     "home": "Home",
     "about": "About",
@@ -16,12 +23,24 @@
     "importDesc": "Sourced from international partners",
     "loadingCategories": "Loading categories...",
     "noCategories": "No categories found",
-    "noProductsAvailable": "No products available"
+    "noProductsAvailable": "No products available",
+    "language": "Language"
   },
- 
+  "Hero": {
+    "tag": "Global Import & Export",
+    "title1": "Connecting Trusted Products",
+    "title2": "With Global Markets",
+    "description": "Krupali Traders Private Limited connects trusted products, reliable suppliers and international markets through professional import and export solutions.",
+    "primaryBtn": "Explore Export Products",
+    "secondaryBtn": "Contact Us",
+    "feature1": "Global Trade",
+    "feature2": "Trusted Quality",
+    "feature3": "Reliable Logistics"
+  },
   "HomePage": {
     "title": "Welcome to Krupali Traders Private Limited",
     "abouttag": "ABOUT US",
+    "aboutTag": "ABOUT US",
     "aboutTitle1": "Global Excellence in",
     "aboutTitle2": "Import & Export Trade",
     "aboutDesc": "We bridge international markets with trusted quality, transparent execution, and seamless logistics.",
@@ -30,6 +49,7 @@
     "globalReachDesc": "Connecting partners across multiple continents efficiently.",
     "trustedTrade": "Trusted Trade",
     "trustedTradeDesc": "Reliable compliance and verified quality standards.",
+    "productsTag": "OUR PRODUCTS",
     "productstag": "OUR PRODUCTS",
     "productsTitle1": "Explore Our Diverse",
     "productsTitle2": "Catalog Range",
@@ -40,6 +60,7 @@
     "importTitle": "Import Solutions",
     "importDesc": "Sourcing high-grade industrial and consumer products from trusted global partners worldwide.",
     "importBtn": "Explore Import Catalog",
+    "whyUsTag": "WHY CHOOSE US",
     "whyUstag": "WHY CHOOSE US",
     "whyUsTitle1": "Built on Trust,",
     "whyUsTitle2": "Driven by Quality",
@@ -49,14 +70,138 @@
     "why2Desc": "Seamless logistics and dependable partnerships across borders.",
     "why3Title": "Customer Focused",
     "why3Desc": "Tailored trade solutions engineered around your business needs.",
+    "ctaTag": "GET IN TOUCH",
     "ctatag": "GET IN TOUCH",
     "ctaTitle": "Ready to Expand Your Global Trade?",
     "ctaDesc": "Partner with Krupali Traders Private Limited for reliable import and export solutions tailored to your enterprise.",
     "ctaBtn": "Contact Us Today",
-    "aboutTag": "ABOUT US",
-    "productsTag": "OUR PRODUCTS",
-    "whyUsTag": "WHY CHOOSE US",
-    "ctaTag": "GET IN TOUCH"
-  }
+    "globalCountriesTag": "GLOBAL REACH",
+    "globalCountriesTitle": "Proudly Exporting to 50+ Countries Worldwide"
+  },
+  "AboutPage": {
+    "heroTag": "ABOUT KRUPALI TRADERS",
+    "heroTitle1": "Your Trusted Partner in",
+    "heroTitle2": "Global Trade",
+    "heroDesc": "Krupali Traders Private Limited is focused on creating dependable connections between quality products and international markets.",
+    "workWithUs": "Work With Us",
+    "exploreProducts": "Explore Products",
+    "globalApproach": "Global Approach",
+    "globalApproachDesc": "Connecting businesses and products across international markets.",
+    "trustedTrade": "Trusted Trade",
+    "trustedTradeDesc": "Professional and transparent trade relationships.",
+    "qualityFocus": "Quality Focus",
+    "qualityFocusDesc": "Focused on dependable sourcing and product quality.",
+    "approachTag": "OUR APPROACH",
+    "approachTitle": "Professional trade connections built for long-term relationships.",
+    "approachDesc": "We aim to make international sourcing and supply straightforward through clear communication, dependable coordination and a quality-focused approach.",
+    "contactBtn": "Contact Us",
+    "learnMore": "Learn More",
+    "getQuote": "Get a Quote",
+    "globalReach": "Global Reach",
+    "globalReachDesc": "Connecting partners across multiple continents efficiently."
+  },
+  "Footer": {
+    "contact": "Contact",
+    "quickLinks": "Quick Links",
+    "home": "Home",
+    "about": "About Us",
+    "exportProducts": "Export Products",
+    "importProducts": "Import Products",
+    "services": "Services",
+    "contactLink": "Contact",
+    "description": "Krupali Traders Private Limited connects trusted products, reliable suppliers and international markets through professional import and export solutions.",
+    "startConversation": "Start a Conversation",
+    "followUs": "Follow Us",
+    "copyright": "© 2026 Krupali Traders Private Limited. All rights reserved.",
+    "tagline": "Import • Export • Global Trade"
+  },
+  "ContactPage": {
+  "tag": "Contact Us",
+  "title": "Let's discuss your trade requirements.",
+  "description": "Contact Krupali Traders Private Limited for import, export and international sourcing enquiries.",
 
-  }
+  "getInTouch": "Get in touch",
+  "getInTouchDescription": "Our team is available to discuss sourcing, import, export and international trade requirements.",
+
+  "location": "Location",
+  "phone": "Phone",
+  "email": "Email",
+
+  "businessEnquiry": "Business Enquiry",
+  "tellUs": "Tell us what you need.",
+  "enquiryDescription": "Whether you are looking for export products, import opportunities or international sourcing support, tell us about your requirements.",
+
+  "name": "Name",
+  "company": "Company",
+  "email": "Email",
+  "phone": "Phone",
+  "country": "Country",
+  "requirementType": "Requirement Type",
+  "product": "Product",
+  "quantity": "Quantity",
+  "message": "Message",
+
+  "namePlaceholder": "Your name",
+  "companyPlaceholder": "Company name",
+  "emailPlaceholder": "you@example.com",
+  "phonePlaceholder": "+91",
+  "countryPlaceholder": "Country",
+  "selectType": "Select type",
+  "productPlaceholder": "Product you're interested in",
+  "quantityPlaceholder": "Required quantity",
+  "messagePlaceholder": "Tell us about your requirements...",
+
+  "import": "Import",
+  "export": "Export",
+
+  "sending": "Sending...",
+  "submit": "Submit Enquiry",
+
+  "successMessage": "Thank you. Your enquiry has been submitted successfully. Our team will contact you shortly.",
+  "submitError": "Unable to submit your enquiry. Please try again."
+},
+
+"BlogPage": {
+  "blogTitle": "Krupali Traders Blog",
+  "blogDescription": "Explore practical insights about international trade, import and export, products, sourcing, packaging, logistics and global markets.",
+  "searchPlaceholder": "Search trade insights...",
+  "search": "Search",
+  "allArticles": "All Articles",
+  "category": "Category",
+  "searchResults": "Search Results",
+  "resultsFor": "Results for \"{query}\"",
+  "articles": "Articles",
+  "article": "article",
+  "featuredArticle": "Featured Article",
+  "readArticle": "Read Article",
+  "latestArticles": "Latest Articles",
+  "readMore": "Read More",
+  "previous": "Previous",
+  "next": "Next",
+  "minRead": "min read",
+  "noArticlesFound": "No Articles Found",
+  "noSearchResults": "We couldn't find any published articles matching \"{query}\".",
+  "noCategoryArticles": "There are currently no published articles in {category}.",
+  "noArticlesAvailable": "There are currently no published articles available.",
+  "viewAllArticles": "View All Articles"
+},
+"BlogArticlePage": {
+  "articleNotFound": "Article Not Found | Krupali Traders",
+  "metadataDescription": "Read {title} on the Krupali Traders Blog.",
+  "backToBlog": "Back to Blog",
+  "minRead": "{minutes} min read",
+  "by": "By",
+  "tags": "Tags",
+  "relatedProduct": "Related Product",
+  "viewProduct": "View Product",
+  "blogTitle": "Krupali Traders Blog",
+  "blogDescription": "Practical insights about international trade, sourcing, import and export, logistics, packaging and global markets.",
+  "exploreAllArticles": "Explore All Articles",
+  "exploreProducts": "Explore Our Products",
+  "exploreProductsDescription": "Discover our import and export products and explore category-wise offerings.",
+  "viewProducts": "View Products",
+  "continueReading": "Continue Reading",
+  "relatedArticles": "Related Articles",
+  "readArticle": "Read Article"
+}
+}
