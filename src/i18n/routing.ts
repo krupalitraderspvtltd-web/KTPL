@@ -2,14 +2,87 @@ import { createNavigation } from "next-intl/navigation";
 import { defineRouting } from "next-intl/routing";
 
 export const routing = defineRouting({
-  locales: ["en", "gu", "hi", "ar"],
+  locales: [
+    "en",
+    "gu",
+    "hi",
+    "ar",
+    "af",
+    "sq",
+    "am",
+    "hy",
+    "az",
+    "be",
+    "bn",
+    "bs",
+    "bg",
+    "ca",
+    "zh-CN",
+    "zh-TW",
+    "hr",
+    "cs",
+    "da",
+    "nl",
+    "et",
+    "fi",
+    "fr",
+    "ka",
+    "de",
+    "el",
+    "ht",
+    "he",
+    "hu",
+    "is",
+    "id",
+    "ga",
+    "it",
+    "ja",
+    "kk",
+    "km",
+    "ko",
+    "ky",
+    "lo",
+    "lv",
+    "lt",
+    "lb",
+    "mk",
+    "mg",
+    "ms",
+    "mt",
+    "mi",
+    "ne",
+    "no",
+    "fa",
+    "fil",
+    "pl",
+    "pt",
+    "ro",
+    "ru",
+    "sr",
+    "si",
+    "sk",
+    "sl",
+    "so",
+    "es",
+    "sw",
+    "sv",
+    "ta",
+    "th",
+    "tr",
+    "uk",
+    "ur",
+    "uz",
+    "vi",
+    "cy",
+  ],
+
   defaultLocale: "en",
+
   localePrefix: "always",
 });
 
 const navigation = createNavigation(routing);
 
-// Named exports
 export const {
   Link,
   redirect,
@@ -18,6 +91,4 @@ export const {
   getPathname,
 } = navigation;
 
-// Default export
-// Required by existing pages such as BlogPage
 export default Link;
