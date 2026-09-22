@@ -1,4 +1,4 @@
-import OpenAI from "openai";
+﻿import OpenAI from "openai";
 
 import { prisma } from "@/lib/prisma";
 
@@ -7,9 +7,17 @@ import {
   type ProductLocale,
 } from "@/lib/product-seo";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+function getOpenAIClient() {
+  const apiKey = process.env.OPENAI_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("OPENAI_API_KEY is not configured.");
+  }
+
+  return new OpenAI({
+    apiKey,
+  });
+}
 
 /* =========================================================
    TYPES
@@ -112,7 +120,7 @@ const LANGUAGE_NAMES: Record<
   mg: "Malagasy",
   ms: "Malay",
   mt: "Maltese",
-  mi: "Māori",
+  mi: "MÄori",
   ne: "Nepali",
   no: "Norwegian",
   fa: "Persian",
@@ -483,6 +491,8 @@ async function generateBatch(
   product: ProductSource,
   locales: ProductLocale[]
 ): Promise<BatchTranslationResult> {
+    const openai = getOpenAIClient();
+
   let lastError: unknown = null;
 
   for (
@@ -734,9 +744,9 @@ export async function generateAllProductTranslations(
    *
    * Example:
    *
-   * Batch 1 → 8 languages
-   * Batch 2 → 8 languages
-   * Batch 3 → 8 languages
+   * Batch 1 â†’ 8 languages
+   * Batch 2 â†’ 8 languages
+   * Batch 3 â†’ 8 languages
    *
    * simultaneously.
    */
@@ -829,3 +839,7 @@ export async function generateAllProductTranslations(
 
   return results;
 }
+
+
+
+
