@@ -1,12 +1,20 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import OpenAI from "openai";
 import { prisma } from "@/lib/prisma";
 
 export const runtime = "nodejs";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+function getOpenAIClient() {
+  const apiKey = process.env.OPENAI_API_KEY;
+
+  if (!apiKey) {
+    throw new Error("OPENAI_API_KEY is not configured.");
+  }
+
+  return new OpenAI({
+    apiKey,
+  });
+}
 
 const MODEL = "gpt-5.6-luna";
 
@@ -57,7 +65,7 @@ function detectRequirement(message: string): Requirement {
     text.includes("quote") ||
     text.includes("price") ||
     text.includes("pricing") ||
-    text.includes("报价")
+    text.includes("æŠ¥ä»·")
   ) {
     return "QUOTATION";
   }
@@ -66,8 +74,8 @@ function detectRequirement(message: string): Requirement {
     text.includes("export") ||
     text.includes("ship to") ||
     text.includes("shipping to") ||
-    text.includes("निर्यात") ||
-    text.includes("નિકાસ")
+    text.includes("à¤¨à¤¿à¤°à¥à¤¯à¤¾à¤¤") ||
+    text.includes("àª¨àª¿àª•àª¾àª¸")
   ) {
     return "EXPORT";
   }
@@ -76,8 +84,8 @@ function detectRequirement(message: string): Requirement {
     text.includes("import") ||
     text.includes("source from") ||
     text.includes("sourcing") ||
-    text.includes("आयात") ||
-    text.includes("આયાત")
+    text.includes("à¤†à¤¯à¤¾à¤¤") ||
+    text.includes("àª†àª¯àª¾àª¤")
   ) {
     return "IMPORT";
   }
@@ -91,10 +99,10 @@ function detectRequirement(message: string): Requirement {
     text.includes("cumin") ||
     text.includes("cardamom") ||
     text.includes("pepper") ||
-    text.includes("उत्पाद") ||
-    text.includes("मसाला") ||
-    text.includes("ઉત્પાદન") ||
-    text.includes("મસાલા")
+    text.includes("à¤‰à¤¤à¥à¤ªà¤¾à¤¦") ||
+    text.includes("à¤®à¤¸à¤¾à¤²à¤¾") ||
+    text.includes("àª‰àª¤à«àªªàª¾àª¦àª¨") ||
+    text.includes("àª®àª¸àª¾àª²àª¾")
   ) {
     return "PRODUCT";
   }
@@ -225,7 +233,9 @@ function normalizeRequirement(
 
 export async function POST(request: NextRequest) {
   try {
-    if (!process.env.OPENAI_API_KEY) {
+    const openai = getOpenAIClient();
+
+if (!process.env.OPENAI_API_KEY) {
       return NextResponse.json(
         {
           success: false,
@@ -705,3 +715,6 @@ Return the response in the requested structured format.
     );
   }
 }
+
+
+
