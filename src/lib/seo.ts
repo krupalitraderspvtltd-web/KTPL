@@ -1,5 +1,9 @@
-export const SITE_URL = "https://www.krupalitraderspvtltd.com";
-export const SITE_NAME = "Krupali Traders Private Limited";
+export const SITE_URL =
+  "https://www.krupalitraderspvtltd.com";
+
+export const SITE_NAME =
+  "Krupali Traders Private Limited";
+
 export const DEFAULT_LOCALE = "en";
 
 export const DEFAULT_TITLE =
@@ -30,7 +34,10 @@ export const KEYWORDS = [
 
 export function absoluteUrl(path = "") {
   if (!path) return SITE_URL;
-  return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+
+  return `${SITE_URL}${
+    path.startsWith("/") ? path : `/${path}`
+  }`;
 }
 
 export function productTitle(
@@ -38,7 +45,10 @@ export function productTitle(
   type: "IMPORT" | "EXPORT"
 ) {
   const action =
-    type === "IMPORT" ? "Importer & Supplier" : "Exporter & Supplier";
+    type === "IMPORT"
+      ? "Importer & Supplier"
+      : "Exporter & Supplier";
+
   return `${name} ${action} from India | Krupali Traders`;
 }
 
@@ -50,5 +60,17 @@ export function productDescription(
     description?.trim() ||
     `${name} supplied by Krupali Traders Private Limited for professional domestic and international trade. Contact us for specifications, packaging, MOQ and quotation details.`;
 
-  return base.length > 160 ? `${base.slice(0, 157).trim()}...` : base;
+  return base.length > 160
+    ? `${base.slice(0, 157).trim()}...`
+    : base;
+}
+
+export function localizedProductUrl(
+  locale: string,
+  type: string,
+  slug: string
+) {
+  return absoluteUrl(
+    `/${locale}/products/${type.toLowerCase()}/${slug}`
+  );
 }

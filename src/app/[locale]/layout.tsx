@@ -1,9 +1,10 @@
-import { NextIntlClientProvider } from "next-intl";
+﻿import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import ClientLayoutWrapper from "@/components/layout/ClientLayoutWrapper";
 import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
+import ChatbotWidget from "@/components/chatbot/ChatbotWidget";
 
 import "../globals.css";
 
@@ -30,6 +31,8 @@ export default async function LocaleLayout({
         <ClientLayoutWrapper>
           {children}
         </ClientLayoutWrapper>
+
+        <ChatbotWidget />
       </ThemeProvider>
     </NextIntlClientProvider>
   );
