@@ -2,10 +2,11 @@ import type { MetadataRoute } from "next";
 
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 const SITE_URL = "https://www.krupalitraderspvtltd.com";
 
 const LOCALES = ["en", "gu", "hi", "ar"] as const;
-const DEFAULT_LOCALE = "en";
 
 const PRODUCT_TYPES = ["IMPORT", "EXPORT"] as const;
 const PUBLISHED_STATUS = "PUBLISHED";
@@ -48,7 +49,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const productEntries: MetadataRoute.Sitemap = [];
 
   for (const product of products) {
-    if (!PRODUCT_TYPES.includes(product.type as (typeof PRODUCT_TYPES)[number])) {
+    if (
+      !PRODUCT_TYPES.includes(
+        product.type as (typeof PRODUCT_TYPES)[number]
+      )
+    ) {
       continue;
     }
 
