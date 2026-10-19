@@ -203,5 +203,15 @@
   "continueReading": "Continue Reading",
   "relatedArticles": "Related Articles",
   "readArticle": "Read Article"
-}
+},
+  "ImportListing": {
+    "filteredCategory": "Filtered Category",
+    "availableCategories": "Available Categories",
+    "exploreCategoryProducts": "Explore category products.",
+    "exploreImportCategories": "Explore our import categories.",
+    "filteredDescription": "Showing products available under this selected import category.",
+    "browseDescription": "Select a category below to browse published import products and individual product information.",
+    "backToAllCategories": "Back to All Categories",
+    "viewItems": "View items"
+  }
 }

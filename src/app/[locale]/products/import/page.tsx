@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   ArrowRight,
   PackageCheck,
@@ -151,6 +152,8 @@ function ImportProductsContent() {
     useSearchParams();
 
   const params = useParams();
+
+  const t = useTranslations("ImportListing");
 
   const locale =
     (params?.locale as string) || "en";
@@ -386,24 +389,24 @@ function ImportProductsContent() {
             {/* Label */}
             <div className="text-sm font-bold uppercase tracking-[0.2em] text-[#c9a24d] dark:text-[#d8b45b]">
               {categoryId
-                ? "Filtered Category"
-                : "Available Categories"}
+                ? t("filteredCategory")
+                : t("availableCategories")}
             </div>
 
             {/* Heading */}
             <h1 className="mt-4 text-4xl font-bold leading-[1.05] tracking-tight text-[var(--foreground)] sm:text-5xl lg:text-6xl">
               <span className="gradient-text">
                 {categoryId
-                  ? "Explore category products."
-                  : "Explore our import categories."}
+                  ? t("exploreCategoryProducts")
+                  : t("exploreImportCategories")}
               </span>
             </h1>
 
             {/* Description */}
             <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[var(--foreground)]/65 sm:text-lg">
               {categoryId
-                ? "Showing products available under this selected import category."
-                : "Select a category below to browse published import products and individual product information."}
+                ? t("filteredDescription")
+                : t("browseDescription")}
             </p>
           </div>
         </div>
@@ -426,7 +429,7 @@ function ImportProductsContent() {
                 href={`/${locale}/products/import`}
                 className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2 text-sm font-semibold text-[var(--foreground)] shadow-sm transition hover:bg-[var(--primary-light)]"
               >
-                Back to All Categories
+                {t("backToAllCategories")}
               </Link>
             </div>
           )}
@@ -561,7 +564,7 @@ function ImportProductsContent() {
                         </h3>
 
                         <p className="mt-1 text-xs text-[var(--foreground)]/60">
-                          View items
+                          {t("viewItems")}
                         </p>
                       </div>
 
