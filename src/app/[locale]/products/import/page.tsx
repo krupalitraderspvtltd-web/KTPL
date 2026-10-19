@@ -190,6 +190,7 @@ function ImportProductsContent() {
           new URLSearchParams();
 
         query.set("type", "IMPORT");
+      query.set("locale", locale);
 
         if (categoryId) {
           query.set(
@@ -362,7 +363,7 @@ function ImportProductsContent() {
     return () => {
       mounted = false;
     };
-  }, [categoryId]);
+  }, [categoryId, locale]);
 
   /* ============================================================
      RENDER
@@ -425,7 +426,7 @@ function ImportProductsContent() {
                 href={`/${locale}/products/import`}
                 className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-5 py-2 text-sm font-semibold text-[var(--foreground)] shadow-sm transition hover:bg-[var(--primary-light)]"
               >
-                ← Back to All Categories
+                Back to All Categories
               </Link>
             </div>
           )}
