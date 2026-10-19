@@ -143,6 +143,58 @@ function getCategoryFallbackImage(
   );
 }
 
+/**
+ * Localize category display names while preserving database values.
+ * Unknown categories fall back to their original name.
+ */
+function getLocalizedCategoryName(
+  name: string,
+  locale: string
+): string {
+  const key = name.trim().toLowerCase();
+
+  const translations: Record<string, Record<string, string>> = {
+    "indian spices": {
+      gu: "\u0aad\u0abe\u0ab0\u0aa4\u0ac0\u0aaf \u0aae\u0ab8\u0abe\u0ab2\u0abe",
+      hi: "\u092d\u093e\u0930\u0924\u0940\u092f \u092e\u0938\u093e\u0932\u0947",
+    },
+    "dry fish": {
+      gu: "\u0ab8\u0ac2\u0a95\u0ac0 \u0aae\u0abe\u0a9b\u0ab2\u0ac0",
+      hi: "\u0938\u0942\u0916\u0940 \u092e\u091b\u0932\u0940",
+    },
+    "nuts & seed": {
+      gu: "\u0ab8\u0ac2\u0a95\u0abe \u0aae\u0ac7\u0ab5\u0abe \u0a85\u0aa8\u0ac7 \u0aac\u0ac0\u0a9c",
+      hi: "\u092e\u0947\u0935\u0947 \u0914\u0930 \u092c\u0940\u091c",
+    },
+    "dal": {
+      gu: "\u0aa6\u0abe\u0ab3",
+      hi: "\u0926\u093e\u0932",
+    },
+    "garam masala": {
+      gu: "\u0a97\u0ab0\u0aae \u0aae\u0ab8\u0abe\u0ab2\u0acb",
+      hi: "\u0917\u0930\u092e \u092e\u0938\u093e\u0932\u093e",
+    },
+    "powder": {
+      gu: "\u0aaa\u0abe\u0ab5\u0aa1\u0ab0",
+      hi: "\u092a\u093e\u0909\u0921\u0930",
+    },
+    "handicrafts": {
+      gu: "\u0ab9\u0ab8\u0acd\u0aa4\u0a95\u0ab2\u0abe",
+      hi: "\u0939\u0938\u094d\u0924\u0936\u093f\u0932\u094d\u092a",
+    },
+    "honey": {
+      gu: "\u0aae\u0aa7",
+      hi: "\u0936\u0939\u0926",
+    },
+    "fresh vegetable": {
+      gu: "\u0aa4\u0abe\u0a9c\u0abe \u0ab6\u0abe\u0a95\u0aad\u0abe\u0a9c\u0ac0",
+      hi: "\u0924\u093e\u091c\u093c\u0940 \u0938\u092c\u094d\u091c\u093c\u093f\u092f\u093e\u0901",
+    },
+  };
+
+  return translations[key]?.[locale] || name;
+}
+
 /* ============================================================
    MAIN CONTENT
    ============================================================ */
@@ -444,12 +496,20 @@ function ImportProductsContent() {
                 ? "Loading..."
                 : categoryId
                 ? `${products.length} ${
-                    products.length === 1
+                    locale === "gu"
+                      ? "\u0a89\u0aa4\u0acd\u0aaa\u0abe\u0aa6\u0aa8\u0acb"
+                      : locale === "hi"
+                      ? "\u0909\u0924\u094d\u092a\u093e\u0926"
+                      : products.length === 1
                       ? "Product"
                       : "Products"
                   }`
                 : `${categories.length} ${
-                    categories.length === 1
+                    locale === "gu"
+                      ? "\u0ab6\u0acd\u0ab0\u0ac7\u0aa3\u0ac0\u0a93"
+                      : locale === "hi"
+                      ? "\u0936\u094d\u0930\u0947\u0923\u093f\u092fाँ"
+                      : categories.length === 1
                       ? "Category"
                       : "Categories"
                   }`}
@@ -471,7 +531,7 @@ function ImportProductsContent() {
               ================================================== */}
 
           {loading && !error && (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {[1, 2, 3].map(
                 (item) => (
                   <div
@@ -499,13 +559,13 @@ function ImportProductsContent() {
             !error &&
             !categoryId &&
             categories.length > 0 && (
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {categories.map(
                   (cat) => (
                     <Link
                       key={cat.id}
                       href={`/${locale}/products/import?categoryId=${cat.id}`}
-                      className="group flex items-center gap-5 overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                      className="group flex min-w-0 items-center gap-3 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-md sm:gap-4 sm:rounded-[2rem] sm:p-5"
                     >
                       {/* ========================================
                           CATEGORY IMAGE
@@ -559,8 +619,8 @@ function ImportProductsContent() {
                           ======================================== */}
 
                       <div className="min-w-0 flex-1">
-                        <h3 className="truncate text-xl font-bold text-[var(--foreground)] transition group-hover:text-[#1455a0] dark:group-hover:text-[#68b0ff]">
-                          {cat.name}
+                        <h3 className="line-clamp-2 break-words text-base font-bold text-[var(--foreground)] transition group-hover:text-[#1455a0] dark:group-hover:text-[#68b0ff] sm:text-lg">
+                          {getLocalizedCategoryName(cat.name, locale)}
                         </h3>
 
                         <p className="mt-1 text-xs text-[var(--foreground)]/60">
@@ -590,7 +650,7 @@ function ImportProductsContent() {
             !error &&
             categoryId &&
             products.length > 0 && (
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
                 {products.map(
                   (product) => (
                     <ProductCard
