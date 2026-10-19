@@ -222,7 +222,26 @@ function getLocalizedCategoryName(
       gu: "\u0a96\u0abe\u0aa6\u0acd\u0aaf \u0aa4\u0ac7\u0ab2",
       hi: "\u0916\u093e\u0926\u094d\u092f \u0924\u0947\u0932",
     },
-    "fresh vegetable": {
+    "fresh fruits": {
+      gu: "\u0aa4\u0abe\u0a9c\u0abe\u0a82 \u0aab\u0ab3",
+      hi: "\u0924\u093e\u091c\u093c\u0947 \u092b\u0932",
+    },
+    "fish": {
+      gu: "\u0aae\u0abe\u0a9b\u0ab2\u0ac0",
+      hi: "\u092e\u091b\u0932\u0940",
+    },
+    "fishes": {
+      gu: "\u0aae\u0abe\u0a9b\u0ab2\u0ac0",
+      hi: "\u092e\u091b\u0932\u093f\u092f\u093e\u0901",
+    },
+    "nuts": {
+      gu: "\u0ab8\u0ac2\u0a95\u0abe \u0aae\u0ac7\u0ab5\u0abe",
+      hi: "\u0938\u0942\u0916\u0947 \u092e\u0947\u0935\u0947",
+    },
+    "meat": {
+      gu: "\u0aae\u0abe\u0a82\u0ab8",
+      hi: "\u092e\u093e\u0902\u0938",
+    },    "fresh vegetable": {
       gu: "\u0aa4\u0abe\u0a9c\u0abe \u0ab6\u0abe\u0a95\u0aad\u0abe\u0a9c\u0ac0",
       hi: "\u0924\u093e\u091c\u093c\u0940 \u0938\u092c\u094d\u091c\u093c\u093f\u092f\u093e\u0901",
     },
