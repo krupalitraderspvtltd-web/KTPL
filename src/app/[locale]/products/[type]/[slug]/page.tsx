@@ -19,6 +19,7 @@ import { prisma } from "@/lib/prisma";
 import {
   absoluteUrl,
   productDescription,
+  productKeywords,
   productTitle,
   SITE_NAME,
 } from "@/lib/seo";
@@ -112,7 +113,7 @@ export async function generateMetadata({
     return {};
   }
 
-  const product =
+  let product =
     await prisma.product.findFirst({
       where: {
         slug,
@@ -137,6 +138,51 @@ export async function generateMetadata({
         },
       },
     });
+
+  if (!product) {
+    const translatedProduct =
+      await prisma.productTranslation.findFirst({
+        where: {
+          locale,
+          slug,
+          product: {
+            type,
+            status: "PUBLISHED",
+          },
+        },
+        select: {
+          product: {
+            select: {
+              id: true,
+            },
+          },
+        },
+      });
+
+    if (translatedProduct) {
+      product = await prisma.product.findFirst({
+        where: {
+          id: translatedProduct.product.id,
+          type,
+          status: "PUBLISHED",
+        },
+        include: {
+          category: true,
+          images: {
+            orderBy: {
+              sortOrder: "asc",
+            },
+          },
+          translations: {
+            where: {
+              locale,
+            },
+            take: 1,
+          },
+        },
+      });
+    }
+  }
 
   if (!product) {
     return {};
@@ -258,11 +304,20 @@ export async function generateMetadata({
     product.images[0]?.alt?.trim() ||
     name;
 
-  const keywords =
+  const customKeywords =
     translation?.seoKeywords
       ?.split(",")
       .map((keyword) => keyword.trim())
-      .filter(Boolean);
+      .filter(Boolean) ?? [];
+
+  const keywords =
+    customKeywords.length > 0
+      ? customKeywords
+      : productKeywords(
+          name,
+          product.type,
+          product.category?.name
+        );
 
   return {
     title: seoTitle,

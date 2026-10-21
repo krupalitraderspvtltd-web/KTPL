@@ -1,4 +1,5 @@
 "use client";
+import { getLocalizedCategoryName } from "@/lib/category-translations";
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useParams } from "next/navigation";
@@ -141,113 +142,6 @@ function getCategoryFallbackImage(
       categoryName
     ] || null
   );
-}
-
-/**
- * Localize category display names while preserving database values.
- * Unknown categories fall back to their original name.
- */
-function getLocalizedCategoryName(
-  name: string,
-  locale: string
-): string {
-  const key = name.trim().toLowerCase();
-
-  const translations: Record<string, Record<string, string>> = {
-    "indian spices": {
-      gu: "\u0aad\u0abe\u0ab0\u0aa4\u0ac0\u0aaf \u0aae\u0ab8\u0abe\u0ab2\u0abe",
-      hi: "\u092d\u093e\u0930\u0924\u0940\u092f \u092e\u0938\u093e\u0932\u0947",
-    },
-    "dry fish": {
-      gu: "\u0ab8\u0ac2\u0a95\u0ac0 \u0aae\u0abe\u0a9b\u0ab2\u0ac0",
-      hi: "\u0938\u0942\u0916\u0940 \u092e\u091b\u0932\u0940",
-    },
-    "nuts & seed": {
-      gu: "\u0ab8\u0ac2\u0a95\u0abe \u0aae\u0ac7\u0ab5\u0abe \u0a85\u0aa8\u0ac7 \u0aac\u0ac0\u0a9c",
-      hi: "\u092e\u0947\u0935\u0947 \u0914\u0930 \u092c\u0940\u091c",
-    },
-    "dal": {
-      gu: "\u0aa6\u0abe\u0ab3",
-      hi: "\u0926\u093e\u0932",
-    },
-    "garam masala": {
-      gu: "\u0a97\u0ab0\u0aae \u0aae\u0ab8\u0abe\u0ab2\u0acb",
-      hi: "\u0917\u0930\u092e \u092e\u0938\u093e\u0932\u093e",
-    },
-    "powder": {
-      gu: "\u0aaa\u0abe\u0ab5\u0aa1\u0ab0",
-      hi: "\u092a\u093e\u0909\u0921\u0930",
-    },
-    "handicrafts": {
-      gu: "\u0ab9\u0ab8\u0acd\u0aa4\u0a95\u0ab2\u0abe",
-      hi: "\u0939\u0938\u094d\u0924\u0936\u093f\u0932\u094d\u092a",
-    },
-    "honey": {
-      gu: "\u0aae\u0aa7",
-      hi: "\u0936\u0939\u0926",
-    },
-    "whole grain": {
-      gu: "\u0a86\u0a96\u0abe \u0a85\u0aa8\u0abe\u0a9c",
-      hi: "\u0938\u092c\u0942\u0924 \u0905\u0928\u093e\u091c",
-    },
-    "millets": {
-      gu: "\u0aae\u0abf\u0ab2\u0ac7\u0a9f\u0acd\u0ab8",
-      hi: "\u092e\u093f\u0932\u0947\u091f\u094d\u0938",
-    },
-    "beans": {
-      gu: "\u0a95\u0acb\u0aa0\u0ab3",
-      hi: "\u092b\u0932\u093f\u092f\u093e\u0901",
-    },
-    "fresh fruit": {
-      gu: "\u0aa4\u0abe\u0a9c\u0abe\u0a82 \u0aab\u0ab3",
-      hi: "\u0924\u093e\u091c\u093c\u0947 \u092b\u0932",
-    },
-    "metal scrap": {
-      gu: "\u0aa7\u0abe\u0aa4\u0ac1\u0aa8\u0acb \u0aad\u0a82\u0a97\u0abe\u0ab0",
-      hi: "\u0927\u093e\u0924\u0941 \u0915\u093e \u0915\u092c\u093e\u0921\u093c",
-    },
-    "fresh vegetables": {
-      gu: "\u0aa4\u0abe\u0a9c\u0abe\u0a82 \u0ab6\u0abe\u0a95\u0aad\u0abe\u0a9c\u0ac0",
-      hi: "\u0924\u093e\u091c\u093c\u0940 \u0938\u092c\u094d\u091c\u093c\u093f\u092f\u093e\u0901",
-    },
-    "indian herbs": {
-      gu: "\u0aad\u0abe\u0ab0\u0aa4\u0ac0\u0aaf \u0a9c\u0aa1\u0ac0\u0aac\u0ac2\u0a9f\u0ac0\u0a93",
-      hi: "\u092d\u093e\u0930\u0924\u0940\u092f \u091c\u0921\u093c\u0940-\u092c\u0942\u091f\u093f\u092f\u093e\u0901",
-    },
-    "dry fruit": {
-      gu: "\u0ab8\u0ac2\u0a95\u0abe \u0aae\u0ac7\u0ab5\u0abe",
-      hi: "\u0938\u0942\u0916\u0947 \u092e\u0947\u0935\u0947",
-    },
-    "edible oil": {
-      gu: "\u0a96\u0abe\u0aa6\u0acd\u0aaf \u0aa4\u0ac7\u0ab2",
-      hi: "\u0916\u093e\u0926\u094d\u092f \u0924\u0947\u0932",
-    },
-    "fresh fruits": {
-      gu: "\u0aa4\u0abe\u0a9c\u0abe\u0a82 \u0aab\u0ab3",
-      hi: "\u0924\u093e\u091c\u093c\u0947 \u092b\u0932",
-    },
-    "fish": {
-      gu: "\u0aae\u0abe\u0a9b\u0ab2\u0ac0",
-      hi: "\u092e\u091b\u0932\u0940",
-    },
-    "fishes": {
-      gu: "\u0aae\u0abe\u0a9b\u0ab2\u0ac0",
-      hi: "\u092e\u091b\u0932\u093f\u092f\u093e\u0901",
-    },
-    "nuts": {
-      gu: "\u0ab8\u0ac2\u0a95\u0abe \u0aae\u0ac7\u0ab5\u0abe",
-      hi: "\u0938\u0942\u0916\u0947 \u092e\u0947\u0935\u0947",
-    },
-    "meat": {
-      gu: "\u0aae\u0abe\u0a82\u0ab8",
-      hi: "\u092e\u093e\u0902\u0938",
-    },    "fresh vegetable": {
-      gu: "\u0aa4\u0abe\u0a9c\u0abe \u0ab6\u0abe\u0a95\u0aad\u0abe\u0a9c\u0ac0",
-      hi: "\u0924\u093e\u091c\u093c\u0940 \u0938\u092c\u094d\u091c\u093c\u093f\u092f\u093e\u0901",
-    },
-  };
-
-  return translations[key]?.[locale] || name;
 }
 
 /* ============================================================
@@ -563,7 +457,7 @@ function ImportProductsContent() {
                     locale === "gu"
                       ? "\u0ab6\u0acd\u0ab0\u0ac7\u0aa3\u0ac0\u0a93"
                       : locale === "hi"
-                      ? "\u0936\u094d\u0930\u0947\u0923\u093f\u092fाँ"
+                      ? "\u0936\u094d\u0930\u0947\u0923\u093f\u092f\u093e\u0902"
                       : categories.length === 1
                       ? "Category"
                       : "Categories"
