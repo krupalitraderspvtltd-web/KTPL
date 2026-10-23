@@ -82,9 +82,7 @@ export default async function ProductsPage() {
               {importCategories.map((category) => (
                 <Link
                   key={category.id}
-                  href={`/products/import?categoryId=${encodeURIComponent(
-                    category.id
-                  )}`}
+                  href={`/products/import/category/${encodeURIComponent(category.slug)}`}
                   className="group overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
                 >
                   {/* IMAGE with fixed relative wrapper */}
@@ -172,9 +170,7 @@ export default async function ProductsPage() {
               {exportCategories.map((category) => (
                 <Link
                   key={category.id}
-                  href={`/products/export?categoryId=${encodeURIComponent(
-                    category.id
-                  )}`}
+                  href={`/products/export/category/${encodeURIComponent(category.slug)}`}
                   className="group overflow-hidden rounded-[2rem] border border-[var(--border)] bg-[var(--surface)] shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-2xl"
                 >
                   {/* IMAGE with fixed relative wrapper */}

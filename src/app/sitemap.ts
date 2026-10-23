@@ -94,5 +94,54 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  return [...staticEntries, ...productEntries];
+  const categories = await prisma.category.findMany({
+    where: {
+      active: true,
+      products: {
+        some: {
+          status: "PUBLISHED",
+        },
+      },
+    },
+    select: {
+      slug: true,
+      type: true,
+      updatedAt: true,
+    },
+  });
+
+  const categoryEntries: MetadataRoute.Sitemap = [];
+
+  for (const category of categories) {
+    if (
+      !PRODUCT_TYPES.includes(
+        category.type as (typeof PRODUCT_TYPES)[number]
+      )
+    ) {
+      continue;
+    }
+
+    const languageUrls: Record<string, string> = {};
+
+    for (const locale of PRODUCT_SEO_LOCALES) {
+      languageUrls[locale] =
+        `${SITE_URL}/${locale}/products/${category.type.toLowerCase()}/category/${encodeURIComponent(category.slug)}`;
+    }
+
+    for (const locale of PRODUCT_SEO_LOCALES) {
+      categoryEntries.push({
+        url: languageUrls[locale],
+        lastModified: category.updatedAt,
+        changeFrequency: "weekly",
+        priority: 0.65,
+        alternates: {
+          languages: {
+            ...languageUrls,
+            "x-default": languageUrls.en,
+          },
+        },
+      });
+    }
+  }
+  return [...staticEntries, ...productEntries, ...categoryEntries];
 }
